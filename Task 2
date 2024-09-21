@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace</title>
+    <link rel="stylesheet">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Caveat:wght@400;700&family=Lobster&family=Monoton&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display+SC:ital,wght@0,400;0,700;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,700&family=Work+Sans:ital,wght@0,400;0,700;1,700&display=swap');
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background: #81b7d2;
+    color: white;
+    padding: 10px;
+}
+
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-style: italic;
+    font-weight: bold;
+    font-family: "Fantasy";
+}
+
+section {
+    margin: 20px;
+}
+
+#product-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.product {
+    border: 1px solid #ccc;
+    margin: 10px;
+    padding: 10px;
+    width: calc(33% - 20px);
+}
+
+.image {
+    width: 160px;
+    height: 55px;
+}
+
+main {
+    background-color: #fff4e6;
+}
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+            <a class="navbar-brand-logo" href="#">
+                <img src="https://d1tgh8fmlzexmh.cloudfront.net/ccbp-responsive-website/ecommerce-website-logo-img.png" class="image d-md-3">
+
+
+            </a>
+
+
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav ml-auto">
+
+
+                    <a class="nav-link text-center" href="#" id="navItem2">Products</a>
+                    <a class="nav-link text-dark" href="#" id="navItem3">Sell</a>
+                    <a class="nav-link text-dark" href="#" id="navItem4">Login</a>
+
+
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="products">
+            <h2>Available Categories</h2>
+            <div id="product-list"></div>
+        </section>
+
+        <section id="sell">
+            <h2>Sell Your Product</h2>
+            <form id="sell-form">
+                <input type="text" placeholder="Product Name" required>
+                <input type="file" required>
+                <textarea placeholder="Description" required></textarea>
+                <input type="number" placeholder="Price" required>
+                <button type="submit">List Product</button>
+            </form>
+        </section>
+    </main>
+
+    <script>
+      const products = [{
+        name: 'Electronics',
+        description: 'Telephones, televisions, and calculators, game consoles, mobile phones, personal computers and MP3 players',
+
+    },
+    {
+        name: 'Beauty & Personal Care',
+        description: ' Skin Care, Hair Care, Color Cosmetics, Fragrances',
+
+    },
+];
+
+function displayProducts() {
+    const productList = document.getElementById('product-list');
+    productList.innerHTML = '';
+    products.forEach((product) => {
+        const productDiv = document.createElement('div');
+        productDiv.className = 'product';
+        productDiv.innerHTML = `
+            <h3>${product.name}</h3>
+            <p>${product.description}</p>
+         
+        `;
+        productList.appendChild(productDiv);
+    });
+}
+
+document.getElementById('sell-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const newProduct = {
+        name: formData.get('name'),
+        description: formData.get('description'),
+
+    };
+    products.push(newProduct);
+    displayProducts();
+    e.target.reset();
+});
+
+displayProducts();
+    </script>
+</body>
+
+</html>
